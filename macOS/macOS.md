@@ -98,6 +98,19 @@ set foldenable
 set foldmethod=manual
 ```
 
+## 更改终端欢迎页
+
+在 [这个网站](http://www.asciiworld.com/) 找到喜欢的图案，复制的到剪切板
+
+```bash
+$ cd /etc
+$ sudo pico motd
+```
+
+粘贴图案，按`command + x`保存，接着按`y`确认，最后回车，重新打开一个终端窗口：
+
+![](../screenshots/3.jpg)
+
 ## tips
 
 1. 安装`NewFileMenuFree`软件，增加右键新建文件选项
