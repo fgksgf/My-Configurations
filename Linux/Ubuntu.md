@@ -65,6 +65,131 @@ set foldenable
 set foldmethod=manual
 ```
 
+## SSH免密登陆
+
+```bash
+$ ssh-copy-id user@server
+```
+
+## Docker
+
+```bash
+$ sudo apt-get update
+
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+   
+$ sudo apt-get update
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+## 文件传输工具
+
+```bash
+$ sudo apt-get install python-pip build-essential python-dev libffi-dev libssl-dev
+$ pip install magic-wormhole
+```
+
+## 搭建redis服务器
+
+1. **添加安全组规则：开放6379端口**
+2. 自定义配置，设置密码
+
+```bash
+$ mkdir /redis
+$ cd /redis
+$ vim redis.conf
+
+######################## redis.conf ########################
+protected-mode no
+port 6379
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+pidfile /var/run/redis_6379.pid
+
+loglevel debug
+logfile ""
+databases 16
+
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+dir ./
+
+# 密码
+requirepass password
+
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+
+appendonly no
+appendfilename "appendonly.aof"
+
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+#############################################################
+```
+
+3. 拉取镜像并使用自定义配置启动容器
+``` bash
+$ docker pull redis
+$ docker run -d -p 6379:6379  -v /root/redis/redis.conf:/redis.conf redis redis-server /redis.conf
+```
+
 
 
 # VPS Configuration
