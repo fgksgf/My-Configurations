@@ -11,7 +11,7 @@
 ![2](../screenshots/2.jpg)
 
 
-## sublime text 3 配置
+## Sublime Text 3 配置
 
 ### 安装插件
 
