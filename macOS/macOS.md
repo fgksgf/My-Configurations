@@ -71,6 +71,22 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 $ source ~/.zshrc
 ```
 
+## hexo
+
+``` bash
+$ npm install -g hexo-cli
+# 在博客目录下
+$ cnpm install
+
+# 常用命令
+# 生成网页文件
+$ hexo g
+# 在本地运行博客
+$ hexo s
+# 部署博客
+$ hexo d
+```
+
 
 
 ## vim
