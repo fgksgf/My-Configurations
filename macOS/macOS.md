@@ -1,6 +1,6 @@
-# macOS Configuration
+# MacOS Configuration
 
-## tools installation
+## Tools Installation
 
 ``` bash
 # 安装homebrew
@@ -14,7 +14,7 @@ $ brew install node
 $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
-## git
+## Git
 
 ``` bash
 $ git config --global user.name "fgksgf"
@@ -22,7 +22,7 @@ $ git config --global user.email "fgksgf@yahoo.com"
 $ ssh-keygen -t rsa -b 4096 -C "fgksgf@yahoo.com"
 ```
 
-## zsh
+## Zsh
 
 ``` bash
 # 安装oh-my-zsh
@@ -71,7 +71,7 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 $ source ~/.zshrc
 ```
 
-## hexo
+## Hexo
 
 ``` bash
 $ npm install -g hexo-cli
@@ -87,9 +87,45 @@ $ hexo s
 $ hexo d
 ```
 
+## Mongodb
+
+```bash
+# 进入 /usr/local
+cd /usr/local
+
+# 下载
+sudo curl -O https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-4.0.9.tgz
+
+# 解压
+sudo tar -zxvf mongodb-osx-ssl-x86_64-4.0.9.tgz
+
+# 重命名为 mongodb 目录
+sudo mv mongodb-osx-x86_64-4.0.9/ mongodb
+
+# 添加到环境变量
+export PATH=/usr/local/mongodb/bin:$PATH
+
+# 创建数据库存储目录
+sudo mkdir -p /data/db
+
+# 后台运行服务端
+mongod --logpath /usr/local/mongodb/log/mongod.log --logappend --fork
+
+# 连接服务端
+mongo
+
+######################创建管理员账号密码#######################
+> use admin 
+
+> db.createUser({ user: "useradmin", pwd: "adminpassword", roles: [{ role: "userAdminAnyDatabase", db: "admin"}]})
+
+> db.auth("useradmin", "adminpassword")
+############################################################
+```
 
 
-## vim
+
+## Vim
 
 ```bash
 $ vim ~/.vimrc
@@ -114,7 +150,7 @@ set foldenable
 set foldmethod=manual
 ```
 
-## 更改终端欢迎页
+## Modify terminal start content
 
 在 [这个网站](http://www.asciiworld.com/) 找到喜欢的图案，复制的到剪切板
 
@@ -127,12 +163,12 @@ $ sudo pico motd
 
 ![](../screenshots/3.jpg)
 
-## tips
+## Tips
 
 1. 安装`NewFileMenuFree`软件，增加右键新建文件选项
 2. 剪切：`command + c` 复制文件，`command + alt + v` 粘贴实现文件的移动。
 
-## 快捷键
+## Shortcuts
 
 + Ctrl + A：到行首（达到Home键的效果）
 + Ctrl + E：到行尾（达到End键的效果）
