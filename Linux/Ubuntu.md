@@ -1,16 +1,16 @@
 # Ubuntu Configuration
 
-## software installation
+## Installation
 
 ``` bash
 $ sudo apt-get update
-$ sudo apt-get install git vim wget zsh node
+$ sudo apt-get install -y git vim wget zsh node
 
 # 使用cnpm代替npm
 $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
-## git
+## Git
 
 ``` bash
 $ git config --global user.name "fgksgf"
@@ -18,7 +18,7 @@ $ git config --global user.email "fgksgf@yahoo.com"
 $ ssh-keygen -t rsa -b 4096 -C "fgksgf@yahoo.com"
 ```
 
-## zsh
+## Zsh
 
 ``` bash
 # 安装oh-my-zsh
@@ -40,7 +40,7 @@ alias gadd="git add"
 alias vps="ssh ubuntu@xxx.xxx.xxx.xxx"
 ```
 
-## vim
+## Vim
 
 ```bash
 $ vim ~/.vimrc
@@ -65,7 +65,7 @@ set foldenable
 set foldmethod=manual
 ```
 
-## SSH免密登陆
+## SSH login without password
 
 ```bash
 $ ssh-copy-id user@server
@@ -76,7 +76,7 @@ $ ssh-copy-id user@server
 ```bash
 $ sudo apt-get update
 
-$ sudo apt-get install \
+$ sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -91,17 +91,25 @@ $ sudo add-apt-repository \
    stable"
    
 $ sudo apt-get update
-$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+$ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 ```
 
-## 文件传输工具
+## Docker compose
 
 ```bash
-$ sudo apt-get install python-pip build-essential python-dev libffi-dev libssl-dev
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+
+## File Transfer Tool
+
+```bash
+$ sudo apt-get install -y python-pip build-essential python-dev libffi-dev libssl-dev
 $ pip install magic-wormhole
 ```
 
-## 搭建redis服务器
+## Redis Server
 
 1. **添加安全组规则：开放6379端口**
 2. 自定义配置，设置密码
@@ -197,7 +205,7 @@ $ docker run -d -p 6379:6379  -v /root/redis/redis.conf:/redis.conf redis redis-
 ## SS
 
 ```bash
-$ sudo apt-get install python-pip
+$ sudo apt-get install -y python-pip
 $ sudo pip install shadowsocks
 $ vim /etc/shadowsocks.json
 
